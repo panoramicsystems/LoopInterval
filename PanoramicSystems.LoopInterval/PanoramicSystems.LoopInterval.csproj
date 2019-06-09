@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>7.3</LangVersion>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <Authors>Panoramic Systems Limited</Authors>
+	  <Copyright>Copyright © Panoramic Systems Limited 2019</Copyright>
+	  <Description>Loop Interval</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageTags>Loops</PackageTags>
+	  <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+	  <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Humanizer.Core" Version="2.6.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="PanoramicSystems.PrefixLogger" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>

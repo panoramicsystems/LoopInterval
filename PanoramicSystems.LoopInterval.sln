@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29001.49
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanoramicSystems.LoopInterval", "PanoramicSystems.LoopInterval\PanoramicSystems.LoopInterval.csproj", "{5AF466E5-ED72-4FEB-A670-AEF9CAC660B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AF466E5-ED72-4FEB-A670-AEF9CAC660B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF466E5-ED72-4FEB-A670-AEF9CAC660B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF466E5-ED72-4FEB-A670-AEF9CAC660B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF466E5-ED72-4FEB-A670-AEF9CAC660B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27AFC0B6-13CD-444B-8115-5DC54CF9C9C7}
+	EndGlobalSection
+EndGlobal
