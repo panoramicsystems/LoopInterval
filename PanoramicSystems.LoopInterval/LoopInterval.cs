@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PanoramicSystems
 {
-	internal abstract class LoopInterval
+	public abstract class LoopInterval
 	{
 		private readonly string _name;
 		public ILogger Logger { get; }

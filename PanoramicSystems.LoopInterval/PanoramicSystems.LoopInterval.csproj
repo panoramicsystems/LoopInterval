@@ -10,14 +10,14 @@
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageTags>Loops</PackageTags>
 	  <PackageIconUrl>https://en.gravatar.com/userimage/33568853/8935cd04180f2c2e1c639cd310b60875.png?size=200</PackageIconUrl>
-	  <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
-	  <Version>1.0.2</Version>
+	  <PackageReleaseNotes>Fix for visibility.</PackageReleaseNotes>
+	  <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Humanizer.Core" Version="2.6.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
-    <PackageReference Include="PanoramicSystems.PrefixLogger" Version="1.0.3" />
+    <PackageReference Include="PanoramicSystems.PrefixLogger" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
