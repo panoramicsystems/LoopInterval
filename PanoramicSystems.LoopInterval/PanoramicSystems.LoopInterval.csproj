@@ -9,8 +9,9 @@
 	  <Description>Loop Interval</Description>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageTags>Loops</PackageTags>
+	  <PackageIconUrl>https://en.gravatar.com/userimage/33568853/8935cd04180f2c2e1c639cd310b60875.png?size=200</PackageIconUrl>
 	  <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
-	  <Version>1.0.1</Version>
+	  <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
