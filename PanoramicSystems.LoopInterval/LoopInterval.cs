@@ -25,11 +25,11 @@ namespace PanoramicSystems
 		/// Loops attempting to keep a minimum interval between the start of each execution.
 		/// Exits when complete or cancelled.
 		/// </summary>
-		/// <param name="intervalMinutes">The minutes, or LoopIntervals.Immediate and LoopIntervals.ExecuteOnce</param>
+		/// <param name="timeSpanInterval">The Timespan to delay between loops. Null will only loop once, Timespan.Zero will loop immediately</param>
 		/// <param name="cancellationToken">CancellationToken</param>
-		public async Task LoopAsync(int intervalMinutes, CancellationToken cancellationToken)
+		public async Task LoopAsync(TimeSpan? timeSpanInterval, CancellationToken cancellationToken)
 		{
-			var syncInterval = TimeSpan.FromMinutes(intervalMinutes);
+			var syncInterval = timeSpanInterval;
 
 			// Create a Stopwatch to monitor how long the sync takes
 			var stopwatch = Stopwatch.StartNew();
@@ -59,7 +59,7 @@ namespace PanoramicSystems
 				Logger.LogInformation($"Finished {_name} in {stopwatch.Elapsed.Humanize(7, minUnit: TimeUnit.Second)}.");
 
 				// Are we repeating?
-				if (intervalMinutes == LoopIntervals.ExecuteOnce)
+				if (syncInterval == null)
 				{
 					// NO
 					Logger.LogInformation($"{_name} configured to run once, finished.");
@@ -67,7 +67,7 @@ namespace PanoramicSystems
 				}
 
 				// YES - determine the interval
-				var remainingTimeInInterval = syncInterval.Subtract(stopwatch.Elapsed);
+				var remainingTimeInInterval = syncInterval.Value.Subtract(stopwatch.Elapsed);
 				if (remainingTimeInInterval.TotalSeconds > 0)
 				{
 					Logger.LogInformation($"Next {_name} will start in {remainingTimeInInterval.Humanize(7, minUnit: TimeUnit.Second)} at {DateTime.UtcNow.Add(remainingTimeInInterval)}.");
@@ -75,7 +75,7 @@ namespace PanoramicSystems
 				}
 				else
 				{
-					Logger.LogWarning($"Next {_name} will start immediately as it took longer than the configured {intervalMinutes} minutes.");
+					Logger.LogWarning($"Next {_name} will start immediately as it took longer than the configured TimeSpan {syncInterval}.");
 				}
 			}
 		}
