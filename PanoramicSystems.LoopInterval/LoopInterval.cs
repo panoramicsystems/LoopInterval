@@ -75,7 +75,7 @@ namespace PanoramicSystems
 				}
 				else
 				{
-					Logger.LogWarning($"Next {_name} will start immediately as it took longer than the configured TimeSpan {syncInterval}.");
+					Logger.LogWarning($"Next {_name} will start immediately as it took {stopwatch.Elapsed}, which is longer than the configured TimeSpan {syncInterval}.");
 				}
 			}
 		}
