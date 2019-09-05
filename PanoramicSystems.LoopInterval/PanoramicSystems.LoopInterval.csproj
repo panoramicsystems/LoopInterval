@@ -10,8 +10,8 @@
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageTags>Loops</PackageTags>
 	  <PackageIconUrl>https://en.gravatar.com/userimage/33568853/8935cd04180f2c2e1c639cd310b60875.png?size=200</PackageIconUrl>
-	  <PackageReleaseNotes>Improved logging to include actual duration when desired interval duration is passed.</PackageReleaseNotes>
-	  <Version>1.0.5</Version>
+	  <PackageReleaseNotes>Interval is now to be provided in the constructor.</PackageReleaseNotes>
+	  <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
