@@ -2,16 +2,16 @@
 
   <PropertyGroup>
 	  <TargetFramework>netstandard2.0</TargetFramework>
-	  <LangVersion>7.3</LangVersion>
+	  <LangVersion>8.0</LangVersion>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <Authors>Panoramic Systems Limited</Authors>
-	  <Copyright>Copyright © Panoramic Systems Limited 2019</Copyright>
+	  <Copyright>Copyright © Panoramic Systems Limited 2020</Copyright>
 	  <Description>Loop Interval</Description>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageTags>Loops</PackageTags>
 	  <PackageIconUrl>https://en.gravatar.com/userimage/33568853/8935cd04180f2c2e1c639cd310b60875.png?size=200</PackageIconUrl>
-	  <PackageReleaseNotes>Interval is now to be provided in the constructor.</PackageReleaseNotes>
-	  <Version>1.1.0</Version>
+	  <PackageReleaseNotes>Improved cancellation handling and logging. Consistent clean return on delay being cancelled.</PackageReleaseNotes>
+	  <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

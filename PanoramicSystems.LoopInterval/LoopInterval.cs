@@ -10,14 +10,12 @@ namespace PanoramicSystems
 {
 	public abstract class LoopInterval
 	{
-		private readonly string _name;
 		private readonly TimeSpan _timeSpanInterval;
 
 		public ILogger Logger { get; }
 
 		protected LoopInterval(string name, TimeSpan timeSpanInterval, ILogger logger)
 		{
-			_name = name;
 			_timeSpanInterval = timeSpanInterval;
 			Logger = new PrefixLogger(name, logger);
 		}
@@ -28,7 +26,6 @@ namespace PanoramicSystems
 		/// Loops attempting to keep a minimum interval between the start of each execution.
 		/// Exits when complete or cancelled.
 		/// </summary>
-		/// <param name="timeSpanInterval">The Timespan to delay between loops. Null will only loop once, Timespan.Zero will loop immediately</param>
 		/// <param name="cancellationToken">CancellationToken</param>
 		public async Task LoopAsync(CancellationToken cancellationToken)
 		{
@@ -39,7 +36,7 @@ namespace PanoramicSystems
 			{
 				stopwatch.Restart();
 
-				Logger.LogInformation($"Starting {_name}...");
+				Logger.LogInformation("Starting...");
 
 				try
 				{
@@ -47,28 +44,40 @@ namespace PanoramicSystems
 				}
 				catch (Exception ex) when (ex is OperationCanceledException || ex is TaskCanceledException)
 				{
-					Logger.LogInformation(ex, $"Loopsync {_name} cancelled.");
+					Logger.LogInformation(ex, "Cancelled during execution.");
 				}
-#pragma warning disable CA1031 // Do not catch general exception types - We're specifically catching everything here
 				catch (Exception ex)
 				{
-					Logger.LogError(ex, $"An unexpected error occurred during the LoopInterval: {ex.Message}");
+					Logger.LogError(ex, $"An unexpected error occurred during the LoopInterval execution: {ex.Message}");
 				}
-#pragma warning restore CA1031 // Do not catch general exception types
+				// We always continue here so we can continue if an Exception occurred during execution that was not related to cancellation
 
 				stopwatch.Stop();
-				Logger.LogInformation($"Finished {_name} in {stopwatch.Elapsed.Humanize(7, minUnit: TimeUnit.Second)}.");
+				Logger.LogInformation($"Finished in {stopwatch.Elapsed.Humanize(7, minUnit: TimeUnit.Second)}.");
+
+				if (cancellationToken.IsCancellationRequested)
+				{
+					// Return gracefully rather than throw an exeception
+					return;
+				}
 
 				// YES - determine the interval
 				var remainingTimeInInterval = _timeSpanInterval.Subtract(stopwatch.Elapsed);
 				if (remainingTimeInInterval.TotalSeconds > 0)
 				{
-					Logger.LogInformation($"Next {_name} will start in {remainingTimeInInterval.Humanize(7, minUnit: TimeUnit.Second)} at {DateTime.UtcNow.Add(remainingTimeInInterval)}.");
-					await Task.Delay(remainingTimeInInterval, cancellationToken).ConfigureAwait(false);
+					Logger.LogInformation($"Next will start in {remainingTimeInInterval.Humanize(7, minUnit: TimeUnit.Second)} at {DateTime.UtcNow.Add(remainingTimeInInterval)}.");
+					try
+					{
+						await Task.Delay(remainingTimeInInterval, cancellationToken).ConfigureAwait(false);
+					}
+					catch (TaskCanceledException ex)
+					{
+						Logger.LogInformation(ex, "Cancelled during interval delay.");
+					}
 				}
 				else
 				{
-					Logger.LogWarning($"Next {_name} will start immediately as it took {stopwatch.Elapsed}, which is longer than the configured TimeSpan {_timeSpanInterval}.");
+					Logger.LogWarning($"Next execution will start immediately as it took {stopwatch.Elapsed}, which is longer than the configured TimeSpan {_timeSpanInterval}.");
 				}
 			}
 		}
